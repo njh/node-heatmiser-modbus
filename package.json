@@ -16,5 +16,21 @@
     "modbus",
     "heatmiser",
     "thermostat"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "standard": "^17.0.0"
+  },
+  "scripts": {
+    "test": "standard && jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  }
 }
