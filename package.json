@@ -1,0 +1,20 @@
+{
+  "name": "heatmiser-modbus",
+  "version": "1.0.0",
+  "description": "Library for controlling Heatmiser Modbus Thermostats",
+  "author": "Nicholas Humfrey",
+  "license": "MIT",
+  "homepage": "https://github.com/njh/node-heatmiser-modbus#readme",
+  "bugs": {
+    "url": "https://github.com/njh/node-heatmiser-modbus/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njh/node-heatmiser-modbus.git"
+  },
+  "keywords": [
+    "modbus",
+    "heatmiser",
+    "thermostat"
+  ]
+}
