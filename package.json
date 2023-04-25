@@ -22,7 +22,7 @@
     "standard": "^17.0.0"
   },
   "scripts": {
-    "test": "standard && jest"
+    "test": "standard && TZ=Europe/London jest"
   },
   "jest": {
     "testEnvironment": "node",
