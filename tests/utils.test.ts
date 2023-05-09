@@ -1,7 +1,5 @@
-'use strict'
-
-const { isDST } = require('../lib/utils')
-const assert = require('assert')
+import { isDST } from '../lib/utils'
+import * as assert from 'assert'
 
 describe('Utility function Tests', function () {
   describe('isDST()', function () {
