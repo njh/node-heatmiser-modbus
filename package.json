@@ -32,13 +32,10 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "test": "jest",
+    "test": "ts-standard && TZ=Europe/London jest",
     "coverage": "jest --coverage",
     "format": "ts-standard --fix",
     "prepack": "tsc"
-  },
-  "scripts": {
-    "test": "ts-standard && TZ=Europe/London jest"
   },
   "jest": {
     "preset": "ts-jest",
