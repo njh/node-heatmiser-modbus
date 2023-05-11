@@ -17,6 +17,9 @@
     "heatmiser",
     "thermostat"
   ],
+  "bin": {
+    "hmmb": "dist/bin/hmmb.js"
+  },
   "files": [
     "dist/lib"
   ],
@@ -24,6 +27,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "commander": "^10.0.1",
     "modbus-serial": "^8.0.11"
   },
   "devDependencies": {
