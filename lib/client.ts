@@ -40,6 +40,7 @@ export default class Client {
   }
 
   async setTime (id: number, time: Date = new Date()): Promise<any> {
+    this.modbus.setID(id)
     return await this.modbus.writeRegisters(46,
       [
         time.getFullYear(),
