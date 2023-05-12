@@ -47,11 +47,6 @@ export default class Client {
     this.modbus.close(() => {})
   }
 
-  async setTemperature (id: number, temperature: number): Promise<any> {
-    this.modbus.setID(id)
-    return await this.modbus.writeRegister(31, 1)
-  }
-
   async turnOn (id: number): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegister(31, 1)
@@ -60,6 +55,11 @@ export default class Client {
   async turnOff (id: number): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegister(31, 0)
+  }
+
+  async setTargetTemperature (id: number, temperature: number): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(33, Math.round(temperature * 10))
   }
 
   async setTime (id: number, time: Date = new Date()): Promise<any> {

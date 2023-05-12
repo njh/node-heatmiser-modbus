@@ -52,6 +52,17 @@ program
   })
 
 program
+  .command('set-temperature')
+  .argument('<temp>', 'the target temperature', parseFloat)
+  .description('Set the target room temperature')
+  .action((temp) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting target temperature to: ', temp)
+      return await thermostat.setTargetTemperature(temp)
+    })
+  })
+
+program
   .command('set-time')
   .description('Sync the system clock to the thermostat')
   .action(() => {
