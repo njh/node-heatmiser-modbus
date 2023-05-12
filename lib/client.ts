@@ -13,8 +13,6 @@ export default class Client {
     this.modbus = new ModbusRTU()
   }
 
-  // FIXME: return a promise?
-  connect (callback: () => void): void {
   addThermostat (id: number, name?: string): Thermostat {
     let thermostat = this.thermostats.get(id)
     if (thermostat === undefined) {
@@ -35,11 +33,13 @@ export default class Client {
   getThermostats (): Thermostat[] {
     return Array.from(this.thermostats.values())
   }
+
+  // FIXME: also provide a callback version of connect() ?
+  async connect (): Promise<any> {
     // Open connection to a serial port
-    this.modbus.connectRTUBuffered(
+    return await this.modbus.connectRTUBuffered(
       this.port,
-      { baudRate: 9600, parity: 'none' },
-      callback
+      { baudRate: 9600, parity: 'none' }
     )
   }
 
