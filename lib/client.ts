@@ -1,17 +1,40 @@
 import { isDST } from '../lib/utils'
+import Thermostat from './thermostat'
 import ModbusRTU from 'modbus-serial'
 
 export default class Client {
-  private readonly port: string
+  private readonly thermostats: Map<number, Thermostat>
+  readonly port: string
   private readonly modbus: ModbusRTU
 
   constructor (port: string) {
+    this.thermostats = new Map<number, Thermostat>()
     this.port = port
     this.modbus = new ModbusRTU()
   }
 
   // FIXME: return a promise?
   connect (callback: () => void): void {
+  addThermostat (id: number, name?: string): Thermostat {
+    let thermostat = this.thermostats.get(id)
+    if (thermostat === undefined) {
+      thermostat = new Thermostat(this, id, name)
+      this.thermostats.set(id, thermostat)
+    }
+    return thermostat
+  }
+
+  getThermostat (id: number): Thermostat | undefined {
+    return this.thermostats.get(id)
+  }
+
+  deleteThermostat (id: number): void {
+    this.thermostats.delete(id)
+  }
+
+  getThermostats (): Thermostat[] {
+    return Array.from(this.thermostats.values())
+  }
     // Open connection to a serial port
     this.modbus.connectRTUBuffered(
       this.port,
