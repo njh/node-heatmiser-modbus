@@ -1,10 +1,27 @@
 #!/usr/bin/env node
 
 import { Command, Option } from 'commander'
-import Client from '../lib/index'
+import { Client, Thermostat } from '../lib/index'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageVersion = require('../package.json').version
+
+function runClient (program: Command, callback: (thermostat: Thermostat) => Promise<any>): void {
+  const options = program.opts()
+  const client = new Client(options.device)
+  const thermostat = client.addThermostat(options.id)
+
+  client.connect()
+    .then(async () => {
+      return await callback(thermostat)
+    })
+    .then(() => {
+      client.close()
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}
 
 const program = new Command()
 
@@ -18,34 +35,31 @@ program
   .command('turn-on')
   .description('Turn on the thermostat')
   .action(() => {
-    const options = program.opts()
-    console.log('Turning On')
-    const client = new Client(options.device)
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    client.connect(() => { client.turnOn(options.id).then(() => client.close()) })
+    runClient(program, async (thermostat) => {
+      console.log('Turning on: ' + thermostat.name)
+      return await thermostat.turnOn()
+    })
   })
 
 program
   .command('turn-off')
   .description('Turn off the thermostat')
   .action(() => {
-    const options = program.opts()
-    console.log('Turning Off')
-    const client = new Client(options.device)
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    client.connect(() => { client.turnOff(options.id).then(() => client.close()) })
+    runClient(program, async (thermostat) => {
+      console.log('Turning off: ' + thermostat.name)
+      return await thermostat.turnOff()
+    })
   })
 
 program
   .command('set-time')
   .description('Sync the system clock to the thermostat')
   .action(() => {
-    const options = program.opts()
-    const now = new Date()
-    console.log('Setting time to: ', now)
-    const client = new Client(options.device)
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    client.connect(() => { client.setTime(options.id, now).then(() => client.close()) })
+    runClient(program, async (thermostat) => {
+      const now = new Date()
+      console.log('Setting time to: ', now)
+      return await thermostat.setTime(now)
+    })
   })
 
 program.parse()
