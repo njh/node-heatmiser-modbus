@@ -26,4 +26,8 @@ export default class Thermostat {
   async setTime (time?: Date): Promise<any> {
     return await this.client.setTime(this.id, time)
   }
+
+  async setKeylock (pin: number | null): Promise<any> {
+    return await this.client.setKeylock(this.id, pin)
+  }
 }

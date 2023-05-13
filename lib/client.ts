@@ -77,4 +77,12 @@ export default class Client {
       return await this.modbus.writeRegister(29, dst)
     })
   }
+
+  async setKeylock (id: number, pin: number | null): Promise<any> {
+    this.modbus.setID(id)
+    if (pin === null) {
+      pin = 0
+    }
+    return await this.modbus.writeRegister(41, pin)
+  }
 }

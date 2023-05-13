@@ -73,4 +73,18 @@ program
     })
   })
 
+program
+  .command('set-keylock')
+  .argument('<pin>', 'a 4-digit pin', parseInt)
+  .description('Set a PIN to lock the keypad with')
+  .action((pin) => {
+    runClient(program, async (thermostat) => {
+      if (isNaN(pin)) {
+        pin = null
+      }
+      console.log('Setting keylock pin to: ', pin)
+      return await thermostat.setKeylock(pin)
+    })
+  })
+
 program.parse()
