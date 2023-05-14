@@ -5,10 +5,22 @@ export default class Thermostat {
   readonly id: number
   public name: string
 
+  firmwareVersion: number | undefined
+  relayStatus: boolean | undefined
+  roomTemperature: number | undefined | null
+  floorTemperature: number | undefined | null
+  targetTemperature: number | undefined | null
+  onOffState: boolean | undefined
+  operationMode: string | undefined | null
+
   constructor (client: Client, id: number, name?: string) {
     this.client = client
     this.id = id
     this.name = name ?? `Thermostat #${id}`
+  }
+
+  async readStatus (): Promise<any> {
+    return await this.client.readStatus(this)
   }
 
   async turnOn (): Promise<any> {

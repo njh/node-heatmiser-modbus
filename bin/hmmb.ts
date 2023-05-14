@@ -32,6 +32,33 @@ program
   .addOption(new Option('-i, --id <num>', 'The Communications ID of the device to control (1-32)').default(1))
 
 program
+  .command('get-status')
+  .description('Display thermostat status (including current temperatures)')
+  .action(() => {
+    runClient(program, async (thermostat) => {
+      return await thermostat.readStatus()
+        .then(() => {
+          // FIXME: how can this be more concise (and keep eslint happy)
+          let relayStatus = thermostat.relayStatus
+          if (relayStatus != null) {
+            relayStatus = (relayStatus ?? false) ? 'On 🔥' : 'Off'
+          }
+          console.log('Relay Status: ', relayStatus)
+          console.log('Room Temperature: ', thermostat.roomTemperature)
+          console.log('Floor Temperature: ', thermostat.floorTemperature)
+          console.log('Target Temperature: ', thermostat.targetTemperature)
+          let onOffState = thermostat.onOffState
+          if (onOffState != null) {
+            onOffState = (onOffState ?? false) ? 'On' : 'Off'
+          }
+          console.log('On/Off State: ', onOffState)
+          console.log('Operation Mode: ', thermostat.operationMode)
+          console.log('Firmware version:', thermostat.firmwareVersion)
+        })
+    })
+  })
+
+program
   .command('turn-on')
   .description('Turn on the thermostat')
   .action(() => {

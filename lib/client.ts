@@ -34,6 +34,42 @@ export default class Client {
     return Array.from(this.thermostats.values())
   }
 
+  private decodeTemperature (temp: number): number | null {
+    if (temp >= 0xfffe) {
+      return null
+    } else {
+      return temp / 10.0
+    }
+  }
+
+  private decodeOperationMode (mode: number): string | null {
+    switch (mode) {
+      case 0: return 'change_over'
+      case 1: return 'schedule'
+      case 2: return 'hold'
+      case 3: return 'advanced'
+      case 4: return 'away'
+      case 5: return 'frost_mode'
+      default: return null
+    }
+  }
+
+  readStatus (thermostat: Thermostat): Promise<any> {
+    this.modbus.setID(thermostat.id)
+    return this.modbus.readHoldingRegisters(0, 9)
+      .then((result) => {
+      	const data = result.data
+        thermostat.firmwareVersion = data[0]
+        thermostat.relayStatus = data[1] !== 0
+        thermostat.roomTemperature = this.decodeTemperature(data[2])
+        thermostat.floorTemperature = this.decodeTemperature(data[3])
+        thermostat.targetTemperature = this.decodeTemperature(data[6])
+        thermostat.onOffState = data[7] !== 0
+        thermostat.operationMode = this.decodeOperationMode(data[8])
+        return thermostat
+      })
+  }
+
   // FIXME: also provide a callback version of connect() ?
   async connect (): Promise<any> {
     // Open connection to a serial port
