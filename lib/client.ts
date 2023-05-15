@@ -54,11 +54,11 @@ export default class Client {
     }
   }
 
-  readStatus (thermostat: Thermostat): Promise<any> {
+  async readStatus (thermostat: Thermostat): Promise<any> {
     this.modbus.setID(thermostat.id)
-    return this.modbus.readHoldingRegisters(0, 9)
+    return await this.modbus.readHoldingRegisters(0, 9)
       .then((result) => {
-      	const data = result.data
+        const data = result.data
         thermostat.firmwareVersion = data[0]
         thermostat.relayStatus = data[1] !== 0
         thermostat.roomTemperature = this.decodeTemperature(data[2])
