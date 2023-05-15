@@ -90,6 +90,18 @@ program
   })
 
 program
+  .command('set-temperature-units')
+  .argument('<units>', 'the temperature units (C or F)')
+  .description('Set the temperature units used by the thermostat')
+  .action((units) => {
+    runClient(program, async (thermostat) => {
+      const initial = units[0].toUpperCase()
+      console.log('Setting temperature units to: ', initial)
+      return await thermostat.setTemperatureUnits(initial)
+    })
+  })
+
+program
   .command('set-time')
   .description('Sync the system clock to the thermostat')
   .action(() => {

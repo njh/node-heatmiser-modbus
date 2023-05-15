@@ -35,6 +35,10 @@ export default class Thermostat {
     return await this.client.setTargetTemperature(this.id, temperature)
   }
 
+  async setTemperatureUnits (units: string): Promise<any> {
+    return await this.client.setTemperatureUnits(this.id, units)
+  }
+
   async setTime (time?: Date): Promise<any> {
     return await this.client.setTime(this.id, time)
   }

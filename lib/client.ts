@@ -98,6 +98,19 @@ export default class Client {
     return await this.modbus.writeRegister(33, Math.round(temperature * 10))
   }
 
+  async setTemperatureUnits (id: number, units: string): Promise<any> {
+    let value: number
+    if (/^[Cc]/.test(units)) {
+      value = 0
+    } else if (/^[Ff]/.test(units)) {
+      value = 1
+    } else {
+      throw new Error('`units` should be [C]elsius or [F]ahrenheit')
+    }
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(20, value)
+  }
+
   async setTime (id: number, time: Date = new Date()): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegisters(46,
