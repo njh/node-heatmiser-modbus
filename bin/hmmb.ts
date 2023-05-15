@@ -37,21 +37,26 @@ program
   .description('Display thermostat status (including current temperatures)')
   .action(() => {
     runClient(program, async (thermostat) => {
-      return await thermostat.readStatus()
-        .then(() => {
+      let units = ''
+      return await thermostat.getTemperatureUnits()
+        .then(async (result) => {
+          units = result
+          return await thermostat.readStatus()
+        })
+        .then((status) => {
           const relayStatus = thermostat.relayStatus == null
             ? 'n/a'
             : thermostat.relayStatus ? 'on 🔥' : 'off'
-          console.log('      Relay Status: ' + pc.bold(relayStatus))
-          console.log('  Room Temperature: ' + pc.bold(thermostat.roomTemperature))
-          console.log(' Floor Temperature: ' + pc.bold(thermostat.floorTemperature))
-          console.log('Target Temperature: ' + pc.bold(thermostat.targetTemperature))
+          console.log(`      Relay Status: ${pc.bold(relayStatus)}`)
+          console.log(`  Room Temperature: ${pc.bold(thermostat.roomTemperature)} °${units}`)
+          console.log(` Floor Temperature: ${pc.bold(thermostat.floorTemperature)} °${units}`)
+          console.log(`Target Temperature: ${pc.bold(thermostat.targetTemperature)} °${units}`)
           const onOffState = thermostat.onOffState == null
             ? 'n/a'
             : thermostat.onOffState ? 'on' : 'off'
-          console.log('      On/Off State: ' + pc.bold(onOffState))
-          console.log('    Operation Mode: ' + pc.bold(thermostat.operationMode))
-          console.log('  Firmware version: ' + pc.bold(thermostat.firmwareVersion))
+          console.log(`      On/Off State: ${pc.bold(onOffState)}`)
+          console.log(`    Operation Mode: ${pc.bold(thermostat.operationMode)}`)
+          console.log(`  Firmware version: ${pc.bold(thermostat.firmwareVersion)}`)
         })
     })
   })

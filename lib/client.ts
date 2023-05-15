@@ -70,6 +70,14 @@ export default class Client {
       })
   }
 
+  async readTemperatureUnits (id: number): Promise<string> {
+    this.modbus.setID(id)
+    return await this.modbus.readHoldingRegisters(20, 1)
+      .then((result) => {
+        return (result.data[0] === 0 ? 'C' : 'F')
+      })
+  }
+
   // FIXME: also provide a callback version of connect() ?
   async connect (): Promise<any> {
     // Open connection to a serial port
