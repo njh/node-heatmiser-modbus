@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command, Option } from 'commander'
+import pc from 'picocolors'
 import { Client, Thermostat } from '../lib/index'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -38,22 +39,19 @@ program
     runClient(program, async (thermostat) => {
       return await thermostat.readStatus()
         .then(() => {
-          // FIXME: how can this be more concise (and keep eslint happy)
-          let relayStatus = thermostat.relayStatus
-          if (relayStatus != null) {
-            relayStatus = (relayStatus ?? false) ? 'On 🔥' : 'Off'
-          }
-          console.log('Relay Status: ', relayStatus)
-          console.log('Room Temperature: ', thermostat.roomTemperature)
-          console.log('Floor Temperature: ', thermostat.floorTemperature)
-          console.log('Target Temperature: ', thermostat.targetTemperature)
-          let onOffState = thermostat.onOffState
-          if (onOffState != null) {
-            onOffState = (onOffState ?? false) ? 'On' : 'Off'
-          }
-          console.log('On/Off State: ', onOffState)
-          console.log('Operation Mode: ', thermostat.operationMode)
-          console.log('Firmware version:', thermostat.firmwareVersion)
+          const relayStatus = thermostat.relayStatus == null
+            ? 'n/a'
+            : thermostat.relayStatus ? 'on 🔥' : 'off'
+          console.log('      Relay Status: ' + pc.bold(relayStatus))
+          console.log('  Room Temperature: ' + pc.bold(thermostat.roomTemperature))
+          console.log(' Floor Temperature: ' + pc.bold(thermostat.floorTemperature))
+          console.log('Target Temperature: ' + pc.bold(thermostat.targetTemperature))
+          const onOffState = thermostat.onOffState == null
+            ? 'n/a'
+            : thermostat.onOffState ? 'on' : 'off'
+          console.log('      On/Off State: ' + pc.bold(onOffState))
+          console.log('    Operation Mode: ' + pc.bold(thermostat.operationMode))
+          console.log('  Firmware version: ' + pc.bold(thermostat.firmwareVersion))
         })
     })
   })
