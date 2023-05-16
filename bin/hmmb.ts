@@ -3,9 +3,7 @@
 import { Command, Option } from 'commander'
 import pc from 'picocolors'
 import { Client, Thermostat } from '../lib/index'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageVersion = require('../package.json').version
+import { version } from '../lib/version'
 
 function runClient (program: Command, callback: (thermostat: Thermostat) => Promise<any>): void {
   const options = program.opts()
@@ -27,7 +25,7 @@ function runClient (program: Command, callback: (thermostat: Thermostat) => Prom
 const program = new Command()
 
 program
-  .version(packageVersion)
+  .version(version)
   .description('Tool for controlling Heatmiser Modbus Thermostats')
   .addOption(new Option('-d, --device <port>', 'The serial port device to connect to (eg /dev/ttyUSB0)').makeOptionMandatory())
   .addOption(new Option('-i, --id <num>', 'The Communications ID of the device to control (1-32)').default(1))

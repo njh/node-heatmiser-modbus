@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/jest": "^27.2.5",
     "@types/node": "^18.11.18",
+    "genversion": "^3.1.1",
     "jest": "^27.2.0",
     "ts-jest": "^27.0.5",
     "ts-standard": "^12.0.2",
@@ -43,6 +44,7 @@
     "test": "ts-standard && TZ=Europe/London jest",
     "coverage": "jest --coverage",
     "format": "ts-standard --fix",
+    "prepare": "genversion --es6 lib/version.ts",
     "prepack": "tsc"
   },
   "jest": {
