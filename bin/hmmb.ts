@@ -92,7 +92,7 @@ program
   })
 
 program
-  .command('set-temperature-units')
+  .command('set-units')
   .argument('<units>', 'the temperature units (C or F)')
   .description('Set the temperature units used by the thermostat')
   .action((units) => {
