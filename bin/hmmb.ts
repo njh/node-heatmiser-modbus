@@ -56,7 +56,6 @@ program
             : thermostat.onOffState ? 'on' : 'off'
           console.log(`      On/Off State: ${pc.bold(onOffState)}`)
           console.log(`    Operation Mode: ${pc.bold(thermostat.operationMode)}`)
-          console.log(`  Firmware version: ${pc.bold(thermostat.firmwareVersion)}`)
         })
     })
   })

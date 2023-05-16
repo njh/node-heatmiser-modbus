@@ -56,16 +56,15 @@ export default class Client {
 
   async readStatus (thermostat: Thermostat): Promise<any> {
     this.modbus.setID(thermostat.id)
-    return await this.modbus.readHoldingRegisters(0, 9)
+    return await this.modbus.readHoldingRegisters(1, 8)
       .then((result) => {
         const data = result.data
-        thermostat.firmwareVersion = data[0]
-        thermostat.relayStatus = data[1] !== 0
-        thermostat.roomTemperature = this.decodeTemperature(data[2])
-        thermostat.floorTemperature = this.decodeTemperature(data[3])
-        thermostat.targetTemperature = this.decodeTemperature(data[6])
-        thermostat.onOffState = data[7] !== 0
-        thermostat.operationMode = this.decodeOperationMode(data[8])
+        thermostat.relayStatus = data[0] !== 0
+        thermostat.roomTemperature = this.decodeTemperature(data[1])
+        thermostat.floorTemperature = this.decodeTemperature(data[2])
+        thermostat.targetTemperature = this.decodeTemperature(data[5])
+        thermostat.onOffState = data[6] !== 0
+        thermostat.operationMode = this.decodeOperationMode(data[7])
         return thermostat
       })
   }
@@ -141,5 +140,11 @@ export default class Client {
       pin = 0
     }
     return await this.modbus.writeRegister(41, pin)
+  }
+
+  async readFirmwareVersion (id: number): Promise<number> {
+    this.modbus.setID(id)
+    return await this.modbus.readHoldingRegisters(0, 1)
+      .then((result) => result.data[0])
   }
 }

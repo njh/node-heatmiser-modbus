@@ -5,7 +5,6 @@ export default class Thermostat {
   readonly id: number
   public name: string
 
-  firmwareVersion: number | undefined
   relayStatus: boolean | undefined
   roomTemperature: number | undefined | null
   floorTemperature: number | undefined | null
@@ -62,5 +61,9 @@ export default class Thermostat {
 
   async setKeylock (pin: number | null): Promise<any> {
     return await this.client.setKeylock(this.id, pin)
+  }
+
+  async readFirmwareVersion (): Promise<number> {
+    return await this.client.readFirmwareVersion(this.id)
   }
 }
