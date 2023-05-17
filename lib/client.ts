@@ -147,4 +147,9 @@ export default class Client {
     return await this.modbus.readHoldingRegisters(0, 1)
       .then((result) => result.data[0])
   }
+
+  async factoryReset (id: number): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(45, 1)
+  }
 }

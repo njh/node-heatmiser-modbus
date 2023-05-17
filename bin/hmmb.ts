@@ -126,4 +126,15 @@ program
     })
   })
 
+program
+  .command('factory-reset')
+  .description('Restore thermostat to the default factory settings')
+  .action(() => {
+    runClient(program, async (thermostat) => {
+      console.log('Performing factory reset')
+      console.log('NOTE: Modbus support will be disabled after reset')
+      return await thermostat.factoryReset()
+    })
+  })
+
 program.parse()

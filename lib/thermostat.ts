@@ -66,4 +66,8 @@ export default class Thermostat {
   async readFirmwareVersion (): Promise<number> {
     return await this.client.readFirmwareVersion(this.id)
   }
+
+  async factoryReset (): Promise<any> {
+    return await this.client.factoryReset(this.id)
+  }
 }

@@ -26,6 +26,7 @@ Commands:
   set-units <units>       Set the temperature units used by the thermostat
   set-time                Sync the system clock to the thermostat
   set-keylock <pin>       Set a PIN to lock the keypad with
+  factory-reset           Restore thermostat to the default factory settings
   help [command]          display help for command
 ```
 
