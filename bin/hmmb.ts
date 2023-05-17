@@ -27,8 +27,8 @@ const program = new Command()
 program
   .version(version)
   .description('Tool for controlling Heatmiser Modbus Thermostats')
-  .addOption(new Option('-d, --device <port>', 'The serial port device to connect to (eg /dev/ttyUSB0)').makeOptionMandatory())
-  .addOption(new Option('-i, --id <num>', 'The Communications ID of the device to control (1-32)').default(1))
+  .addOption(new Option('-d, --device <port>', 'The serial port device to connect to (eg /dev/ttyUSB0)').env('HMMB_DEVICE').makeOptionMandatory())
+  .addOption(new Option('-i, --id <num>', 'The Communications ID of the device to control (1-32)').env('HMMB_ID').default(1))
 
 program
   .command('get-status')
