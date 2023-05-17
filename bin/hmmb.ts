@@ -90,6 +90,25 @@ program
   })
 
 program
+  .command('set-hold')
+  .argument('<temp>', 'temperature for hold period')
+  .argument('<hours:mins>', 'time of hold period')
+  .description('set a different temperature for a desired duration')
+  .action((temp: number, duration: string) => {
+    runClient(program, async (thermostat) => {
+      let mins: number
+      const matches = duration.match(/^(\d+):(\d+)$/)
+      if (matches != null) {
+        mins = (parseInt(matches[1]) * 60) + parseInt(matches[2])
+      } else {
+        mins = parseInt(duration)
+      }
+      console.log(`Setting temperature to ${temp} for ${mins} minutes`)
+      return await thermostat.setHoldTemperature(temp, mins)
+    })
+  })
+
+program
   .command('set-units')
   .argument('<units>', 'the temperature units (C or F)')
   .description('Set the temperature units used by the thermostat')

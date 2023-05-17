@@ -35,6 +35,10 @@ export default class Thermostat {
     return await this.client.setTargetTemperature(this.id, temperature)
   }
 
+  async setHoldTemperature (temperature: number, minutes: number): Promise<any> {
+    return await this.client.setHoldTemperature(this.id, temperature, minutes)
+  }
+
   async getTemperatureUnits (): Promise<any> {
     if (this.temperatureUnits === undefined) {
       return await this.readTemperatureUnits()
