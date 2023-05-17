@@ -90,10 +90,21 @@ program
   })
 
 program
+  .command('set-floor-limit')
+  .argument('<temp>', 'the temperature limit', parseFloat)
+  .description('Set the temperature limit for the floor sensor')
+  .action((temp) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting floor limit temperature to: ', temp)
+      return await thermostat.setFloorLimitTemperature(temp)
+    })
+  })
+
+program
   .command('set-hold')
   .argument('<temp>', 'temperature for hold period')
   .argument('<hours:mins>', 'time of hold period')
-  .description('set a different temperature for a desired duration')
+  .description('Set a different temperature for a desired duration')
   .action((temp: number, duration: string) => {
     runClient(program, async (thermostat) => {
       let mins: number

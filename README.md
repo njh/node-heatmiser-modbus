@@ -23,7 +23,8 @@ Commands:
   turn-on                       Turn on the thermostat
   turn-off                      Turn off the thermostat
   set-temperature <temp>        Set the target room temperature
-  set-hold <temp> <hours:mins>  set a different temperature for a desired duration
+  set-floor-limit <temp>        Set the temperature limit for the floor sensor
+  set-hold <temp> <hours:mins>  Set a different temperature for a desired duration
   set-units <units>             Set the temperature units used by the thermostat
   set-time                      Sync the system clock to the thermostat
   set-keylock <pin>             Set a PIN to lock the keypad with
