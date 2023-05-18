@@ -118,6 +118,11 @@ export default class Client {
     return await this.modbus.writeRegister(25, Math.round(temperature * 10))
   }
 
+  async setUpDownLimit (id: number, limit: number): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(23, Math.round(limit * 10))
+  }
+
   async setTemperatureUnits (id: number, units: string): Promise<any> {
     let value: number
     if (/^[Cc]/.test(units)) {

@@ -101,6 +101,17 @@ program
   })
 
 program
+  .command('set-up-down-limit')
+  .argument('<limit>', 'the +/- temperature limit', parseFloat)
+  .description('Set a limit on the use of the up and down keys')
+  .action((limit) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting up/down temperature limit to: ', limit)
+      return await thermostat.setUpDownLimit(limit)
+    })
+  })
+
+program
   .command('set-hold')
   .argument('<temp>', 'temperature for hold period')
   .argument('<hours:mins>', 'time of hold period')
