@@ -148,7 +148,7 @@ program
   .action(() => {
     runClient(program, async (thermostat) => {
       const now = new Date()
-      console.log('Setting time to: ', now)
+      console.log('Setting time to: ', now.toLocaleString())
       return await thermostat.setTime(now)
     })
   })
