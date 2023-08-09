@@ -1,4 +1,3 @@
-import { isDST } from '../lib/utils'
 import Thermostat from './thermostat'
 import ModbusRTU from 'modbus-serial'
 
@@ -145,11 +144,7 @@ export default class Client {
         (time.getHours() << 8) + time.getMinutes(),
         time.getSeconds()
       ]
-
-    ).then(async () => {
-      const dst = isDST(time) ? 0x01 : 0x00
-      return await this.modbus.writeRegister(29, dst)
-    })
+    )
   }
 
   async setKeylock (id: number, pin: number | null): Promise<any> {
