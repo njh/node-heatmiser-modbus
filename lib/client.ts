@@ -117,6 +117,12 @@ export default class Client {
     return await this.modbus.writeRegister(25, Math.round(temperature * 10))
   }
 
+  async setSwitchingDifferential (id: number, temperature: number): Promise<any> {
+    this.modbus.setID(id)
+    // FIXME: should this be validated?
+    return await this.modbus.writeRegister(21, Math.round(temperature * 10))
+  }
+
   async setUpDownLimit (id: number, limit: number): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegister(23, Math.round(limit * 10))

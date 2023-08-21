@@ -39,6 +39,10 @@ export default class Thermostat {
     return await this.client.setFloorLimitTemperature(this.id, temperature)
   }
 
+  async setSwitchingDifferential (temperature: number): Promise<any> {
+    return await this.client.setSwitchingDifferential(this.id, temperature)
+  }
+
   async setUpDownLimit (limit: number): Promise<any> {
     return await this.client.setUpDownLimit(this.id, limit)
   }

@@ -101,6 +101,20 @@ program
   })
 
 program
+  .command('set-switching-differential')
+  .addArgument(
+    new Argument('<temp>')
+      .choices(['0.5', '1.0', '2.0', '3.0'])
+  )
+  .description('Set the thermostat switching differential (in °C)')
+  .action((temp: string) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting switching differential to: ', temp)
+      return await thermostat.setSwitchingDifferential(parseFloat(temp))
+    })
+  })
+
+program
   .command('set-up-down-limit')
   .argument('<limit>', 'the +/- temperature limit', parseFloat)
   .description('Set a limit on the use of the up and down keys')
