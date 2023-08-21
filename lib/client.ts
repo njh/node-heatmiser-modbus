@@ -112,6 +112,11 @@ export default class Client {
     return await this.modbus.writeRegister(33, Math.round(temperature * 10))
   }
 
+  async setFrostProtectTemperature (id: number, temperature: number): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(36, Math.round(temperature * 10))
+  }
+
   async setFloorLimitTemperature (id: number, temperature: number): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegister(25, Math.round(temperature * 10))

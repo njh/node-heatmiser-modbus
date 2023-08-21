@@ -35,6 +35,10 @@ export default class Thermostat {
     return await this.client.setTargetTemperature(this.id, temperature)
   }
 
+  async setFrostProtectTemperature (temperature: number): Promise<any> {
+    return await this.client.setFrostProtectTemperature(this.id, temperature)
+  }
+
   async setFloorLimitTemperature (temperature: number): Promise<any> {
     return await this.client.setFloorLimitTemperature(this.id, temperature)
   }

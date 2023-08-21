@@ -101,6 +101,17 @@ program
   })
 
 program
+  .command('set-frost-temperature')
+  .argument('<temp>', 'the frost protect temperature', parseFloat)
+  .description('Set the frost protection temperature (7-17 °C)')
+  .action((temp) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting frost protection temperature to: ', temp)
+      return await thermostat.setFrostProtectTemperature(temp)
+    })
+  })
+
+program
   .command('set-switching-differential')
   .addArgument(
     new Argument('<temp>')
