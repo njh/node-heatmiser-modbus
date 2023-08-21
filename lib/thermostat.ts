@@ -71,6 +71,10 @@ export default class Thermostat {
     return await this.client.setTime(this.id, time)
   }
 
+  async setAutoDST (enabled: boolean): Promise<any> {
+    return await this.client.setAutoDST(this.id, enabled)
+  }
+
   async setKeylock (pin: number | null): Promise<any> {
     return await this.client.setKeylock(this.id, pin)
   }

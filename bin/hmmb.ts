@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Command, Option } from 'commander'
+import { Argument, Command, Option } from 'commander'
 import pc from 'picocolors'
 import { Client, Thermostat } from '../lib/index'
 import { version } from '../lib/version'
@@ -150,6 +150,25 @@ program
       const now = new Date()
       console.log('Setting time to: ', now.toLocaleString())
       return await thermostat.setTime(now)
+    })
+  })
+
+program
+  .command('set-auto-dst')
+  .addArgument(
+    new Argument('<on or off>')
+    .choices(['on', 'off'])
+  )
+  .description('Enable or disable automatic adjustment for Daylight Saving Time')
+  .action((enabled) => {
+    runClient(program, async (thermostat) => {
+      if (enabled == 'on') {
+		  console.log('Enabling automatic Daylight Saving Time adjustments')
+		  return await thermostat.setAutoDST(true)
+      } else if (enabled == 'off') {
+		  console.log('Disabling automatic Daylight Saving Time adjustments')
+		  return await thermostat.setAutoDST(false)
+      }
     })
   })
 

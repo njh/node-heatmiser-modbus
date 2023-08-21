@@ -147,6 +147,11 @@ export default class Client {
     )
   }
 
+  async setAutoDST (id: number, enabled: boolean): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(29, enabled ? 0x01 : 0x00)
+  }
+
   async setKeylock (id: number, pin: number | null): Promise<any> {
     this.modbus.setID(id)
     if (pin === null) {
