@@ -157,17 +157,17 @@ program
   .command('set-auto-dst')
   .addArgument(
     new Argument('<on or off>')
-    .choices(['on', 'off'])
+      .choices(['on', 'off'])
   )
   .description('Enable or disable automatic adjustment for Daylight Saving Time')
   .action((enabled) => {
     runClient(program, async (thermostat) => {
-      if (enabled == 'on') {
-		  console.log('Enabling automatic Daylight Saving Time adjustments')
-		  return await thermostat.setAutoDST(true)
-      } else if (enabled == 'off') {
-		  console.log('Disabling automatic Daylight Saving Time adjustments')
-		  return await thermostat.setAutoDST(false)
+      if (enabled === 'on') {
+        console.log('Enabling automatic Daylight Saving Time adjustments')
+        return await thermostat.setAutoDST(true)
+      } else if (enabled === 'off') {
+        console.log('Disabling automatic Daylight Saving Time adjustments')
+        return await thermostat.setAutoDST(false)
       }
     })
   })
