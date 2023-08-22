@@ -156,6 +156,20 @@ program
   })
 
 program
+  .command('set-programme-periods')
+  .addArgument(
+    new Argument('<periods>').choices(['4', '6'])
+  )
+  .description('Set the number of programme periods')
+  .action((periods) => {
+    const number = parseInt(periods)
+    runClient(program, async (thermostat) => {
+      console.log('Setting number of programme periods to: ', number)
+      return await thermostat.setProgrammePeriods(number)
+    })
+  })
+
+program
   .command('set-units')
   .argument('<units>', 'the temperature units (C or F)')
   .description('Set the temperature units used by the thermostat')

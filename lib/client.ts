@@ -99,6 +99,20 @@ export default class Client {
     return await this.modbus.writeRegister(31, 0)
   }
 
+  async setProgrammePeriods (id: number, periods: number): Promise<any> {
+    let value: number
+    if (periods === 4) {
+      value = 0x00
+    } else if (periods === 6) {
+      value = 0x01
+    } else {
+      throw new Error('invalid number of programme periods')
+    }
+
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(27, value)
+  }
+
   async setHoldTemperature (id: number, temperature: number, minutes: number): Promise<any> {
     const hours = Math.floor(minutes / 60)
     const mins = minutes % 60
