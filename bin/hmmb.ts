@@ -167,6 +167,25 @@ program
   })
 
 program
+  .command('set-sensors')
+  .argument('<mode>', 'the sensor selection mode number', parseInt)
+  .description('Set the sensor selection mode. See extended help for values.')
+  .addHelpText('after',
+    '\nSensor modes:\n' +
+    '  0    Built in Sensor with optional Remote Air (Default)\n' +
+    '  1    Remoter Air only\n' +
+    '  2    Floor Sensor only\n' +
+    '  3    Built in + Floor Sensor + optional Remote Air\n' +
+    '  4    Floor Sensor and Remote Air only\n'
+  )
+  .action((mode) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting sensor selection mode to: ', mode)
+      return await thermostat.setSensorSelection(mode)
+    })
+  })
+
+program
   .command('set-programme-periods')
   .addArgument(
     new Argument('<periods>').choices(['4', '6'])

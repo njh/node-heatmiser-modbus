@@ -131,6 +131,11 @@ export default class Client {
     return await this.modbus.writeRegister(36, Math.round(temperature * 10))
   }
 
+  async setSensorSelection (id: number, mode: number): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(24, mode)
+  }
+
   async setFloorLimitTemperature (id: number, temperature: number): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegister(25, Math.round(temperature * 10))

@@ -47,6 +47,10 @@ export default class Thermostat {
     return await this.client.setFrostProtectTemperature(this.id, temperature)
   }
 
+  async setSensorSelection (mode: number): Promise<any> {
+    return await this.client.setSensorSelection(this.id, mode)
+  }
+
   async setFloorLimitTemperature (temperature: number): Promise<any> {
     return await this.client.setFloorLimitTemperature(this.id, temperature)
   }
