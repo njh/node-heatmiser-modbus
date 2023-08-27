@@ -145,6 +145,17 @@ program
   })
 
 program
+  .command('set-output-delay')
+  .argument('<minutes>', 'the number of minutes delay by', parseInt)
+  .description('Set time in minutes to delay output switching by')
+  .action((minutes: number) => {
+    runClient(program, async (thermostat) => {
+      console.log('Setting output delay to: ', minutes)
+      return await thermostat.setOutputDelay(minutes)
+    })
+  })
+
+program
   .command('set-up-down-limit')
   .argument('<limit>', 'the +/- temperature limit', parseFloat)
   .description('Set a limit on the use of the up and down keys')

@@ -142,6 +142,11 @@ export default class Client {
     return await this.modbus.writeRegister(21, Math.round(temperature * 10))
   }
 
+  async setOutputDelay (id: number, minutes: number): Promise<any> {
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(22, minutes)
+  }
+
   async setUpDownLimit (id: number, limit: number): Promise<any> {
     this.modbus.setID(id)
     return await this.modbus.writeRegister(23, Math.round(limit * 10))

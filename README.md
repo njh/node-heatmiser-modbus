@@ -27,6 +27,7 @@ Commands:
   set-floor-limit <temp>             Set the temperature limit for the floor sensor
   set-frost-temperature <temp>       Set the frost protection temperature (7-17 °C)
   set-switching-differential <temp>  Set the thermostat switching differential (in °C)
+  set-output-delay <minutes>         Set time in minutes to delay output switching by
   set-up-down-limit <limit>          Set a limit on the use of the up and down keys
   set-programme-periods <periods>    Set the number of programme periods
   set-units <units>                  Set the temperature units used by the thermostat
