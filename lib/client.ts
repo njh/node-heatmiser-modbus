@@ -13,6 +13,15 @@ export default class Client {
     'none'
   ]
 
+  static readonly operationModes = [
+    'change_over',
+    'schedule',
+    'hold',
+    'advanced',
+    'away',
+    'frost_mode'
+  ]
+
   constructor (port: string) {
     this.thermostats = new Map<number, Thermostat>()
     this.port = port
@@ -48,18 +57,6 @@ export default class Client {
     }
   }
 
-  private decodeOperationMode (mode: number): string | null {
-    switch (mode) {
-      case 0: return 'change_over'
-      case 1: return 'schedule'
-      case 2: return 'hold'
-      case 3: return 'advanced'
-      case 4: return 'away'
-      case 5: return 'frost_mode'
-      default: return null
-    }
-  }
-
   async readStatus (thermostat: Thermostat): Promise<any> {
     this.modbus.setID(thermostat.id)
     return await this.modbus.readHoldingRegisters(1, 8)
@@ -70,7 +67,7 @@ export default class Client {
         thermostat.floorTemperature = this.decodeTemperature(data[2])
         thermostat.targetTemperature = this.decodeTemperature(data[5])
         thermostat.onOffState = data[6] !== 0
-        thermostat.operationMode = this.decodeOperationMode(data[7])
+        thermostat.operationMode = Client.operationModes[data[7]]
         return thermostat
       })
   }
