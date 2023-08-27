@@ -200,6 +200,27 @@ program
   })
 
 program
+  .command('set-programme-mode')
+  .argument('<mode>', 'the programme mode number or name')
+  .description('Set the type of programme / schedule mode. See extended help for details.')
+  .addHelpText('after',
+    '\nProgramme modes:\n' +
+    '  0   5day_2day   One schedule for weekdays, another for weekends (Default)\n' +
+    '  1   7day        Different schedule for each day of the week\n' +
+    '  2   24hour      Same schedule every day\n' +
+    '  3   none        Non-Programmable - temperature control only\n'
+  )
+  .action((mode) => {
+    if (mode.match(/^\d$/) !== null) {
+      mode = parseInt(mode)
+    }
+    runClient(program, async (thermostat) => {
+      console.log('Setting programme mode to: ', mode)
+      return await thermostat.setProgrammeMode(mode)
+    })
+  })
+
+program
   .command('set-units')
   .argument('<units>', 'the temperature units (C or F)')
   .description('Set the temperature units used by the thermostat')

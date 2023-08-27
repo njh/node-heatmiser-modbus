@@ -6,6 +6,13 @@ export default class Client {
   readonly port: string
   private readonly modbus: ModbusRTU
 
+  static readonly programmeModes = [
+    '5day_2day',
+    '7day',
+    '24hour',
+    'none'
+  ]
+
   constructor (port: string) {
     this.thermostats = new Map<number, Thermostat>()
     this.port = port
@@ -119,6 +126,24 @@ export default class Client {
 
     this.modbus.setID(id)
     return await this.modbus.writeRegister(27, value)
+  }
+
+  async setProgrammeMode (id: number, mode: number | string): Promise<any> {
+    let value: number
+    if (typeof mode === 'number') {
+      // FIXME: validate mode number?
+      value = mode
+    } else if (typeof mode === 'string') {
+      value = Client.programmeModes.indexOf(mode)
+      if (value === -1) {
+        throw new Error(`invalid programme mode: ${mode}`)
+      }
+    } else {
+      throw new Error(`unknown type passed to set programme mode: ${typeof mode}`)
+    }
+
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(28, value)
   }
 
   async setTargetTemperature (id: number, temperature: number): Promise<any> {

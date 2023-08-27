@@ -39,6 +39,10 @@ export default class Thermostat {
     return await this.client.setProgrammePeriods(this.id, periods)
   }
 
+  async setProgrammeMode (mode: number | string): Promise<any> {
+    return await this.client.setProgrammeMode(this.id, mode)
+  }
+
   async setTargetTemperature (temperature: number): Promise<any> {
     return await this.client.setTargetTemperature(this.id, temperature)
   }
