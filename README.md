@@ -39,3 +39,17 @@ Commands:
   factory-reset                      Restore thermostat to the default factory settings
   help [command]                     display help for command
 ```
+License
+-------
+
+`node-modbus-heatmiser` is licensed under the terms of the MIT license.
+See the file [LICENSE](/LICENSE.md) for details.
+
+This software is independently written and maintained and is not supported by Heatmiser UK Limited.
+
+
+Contact
+-------
+
+* Author:    Nicholas J Humfrey
+* Twitter:   [@njh](http://twitter.com/njh)
