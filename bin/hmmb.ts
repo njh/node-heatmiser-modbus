@@ -14,11 +14,11 @@ function runClient (program: Command, callback: (thermostat: Thermostat) => Prom
     .then(async () => {
       return await callback(thermostat)
     })
-    .then(() => {
-      client.close()
-    })
     .catch((err) => {
       console.error(err)
+    })
+    .finally(() => {
+      client.close()
     })
 }
 
