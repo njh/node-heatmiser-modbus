@@ -99,6 +99,14 @@ export default class Client {
     return await this.modbus.writeRegister(31, 0)
   }
 
+  async holdMode (id: number, temperature: number, minutes: number): Promise<any> {
+    const hours = Math.floor(minutes / 60)
+    const mins = minutes % 60
+    this.modbus.setID(id)
+    return await this.modbus.writeRegister(37, (hours << 8) + mins)
+      .then(async () => await this.setTargetTemperature(id, temperature))
+  }
+
   async setProgrammePeriods (id: number, periods: number): Promise<any> {
     let value: number
     if (periods === 4) {
@@ -111,14 +119,6 @@ export default class Client {
 
     this.modbus.setID(id)
     return await this.modbus.writeRegister(27, value)
-  }
-
-  async setHoldTemperature (id: number, temperature: number, minutes: number): Promise<any> {
-    const hours = Math.floor(minutes / 60)
-    const mins = minutes % 60
-    this.modbus.setID(id)
-    return await this.modbus.writeRegister(37, (hours << 8) + mins)
-      .then(async () => await this.setTargetTemperature(id, temperature))
   }
 
   async setTargetTemperature (id: number, temperature: number): Promise<any> {

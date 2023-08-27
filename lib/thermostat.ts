@@ -31,6 +31,10 @@ export default class Thermostat {
     return await this.client.turnOff(this.id)
   }
 
+  async holdMode (temperature: number, minutes: number): Promise<any> {
+    return await this.client.holdMode(this.id, temperature, minutes)
+  }
+
   async setProgrammePeriods (periods: number): Promise<any> {
     return await this.client.setProgrammePeriods(this.id, periods)
   }
@@ -53,10 +57,6 @@ export default class Thermostat {
 
   async setUpDownLimit (limit: number): Promise<any> {
     return await this.client.setUpDownLimit(this.id, limit)
-  }
-
-  async setHoldTemperature (temperature: number, minutes: number): Promise<any> {
-    return await this.client.setHoldTemperature(this.id, temperature, minutes)
   }
 
   async getTemperatureUnits (): Promise<any> {

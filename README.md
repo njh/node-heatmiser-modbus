@@ -22,13 +22,13 @@ Commands:
   get-status                         Display thermostat status (including current temperatures)
   turn-on                            Turn on the thermostat
   turn-off                           Turn off the thermostat
+  hold <temp> <hours:mins>           Set a different temperature for a desired duration
   set-temperature <temp>             Set the target room temperature
   set-floor-limit <temp>             Set the temperature limit for the floor sensor
   set-frost-temperature <temp>       Set the frost protection temperature (7-17 °C)
   set-switching-differential <temp>  Set the thermostat switching differential (in °C)
   set-up-down-limit <limit>          Set a limit on the use of the up and down keys
-  set-hold <temp> <hours:mins>       Set a different temperature for a desired duration
-  set-programme-mode <mode>          Set the programme (schedule) mode for the thermostat
+  set-programme-periods <periods>    Set the number of programme periods
   set-units <units>                  Set the temperature units used by the thermostat
   set-time                           Sync the system clock to the thermostat
   set-auto-dst <on or off>           Enable or disable automatic adjustment for Daylight Saving Time
