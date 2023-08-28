@@ -12,6 +12,13 @@ To connect a Heatmiser Modbus Thermostat to a computer, you need a RS-485 adapto
 
 I initially had some trouble with connecting using a short (1m) cable during testing, until I discovered that the termination resistor in the Heatmiser Edge had to be switched *off* for short distances.
 
+The following RS-485 interfaces have been tested with:
+* [Waveshare USB to RS485 Bidirectional Converter](https://www.waveshare.com/product/iot-communication/wired-comm-converter/usb-to-rs485.htm)
+* [Waveshare USB to RS232/485/TTL Converter](https://www.waveshare.com/product/iot-communication/wired-comm-converter/usb-to-rs232-uart-fifo/usb-to-rs232-485-ttl.htm?sku=15817)
+
+There are some very expensive industrial RS-485 interfaces out there.
+But I have found [Waveshare](https://www.waveshare.com/) to be a good balance between cost and quality.
+
 
 Command Line Tool
 -----------------
