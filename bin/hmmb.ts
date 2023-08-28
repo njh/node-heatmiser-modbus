@@ -190,7 +190,7 @@ program
   .addArgument(
     new Argument('<periods>').choices(['4', '6'])
   )
-  .description('Set the number of programme periods')
+  .description('Set the number of programme periods for each day')
   .action((periods) => {
     const number = parseInt(periods)
     runClient(program, async (thermostat) => {

@@ -55,7 +55,7 @@ Commands:
   set-output-delay <minutes>         Set time in minutes to delay output switching by
   set-up-down-limit <limit>          Set a limit on the use of the up and down keys
   set-sensors <mode>                 Set the sensor selection mode. See extended help for values.
-  set-programme-periods <periods>    Set the number of programme periods
+  set-programme-periods <periods>    Set the number of programme periods for each day
   set-programme-mode <mode>          Set the type of programme / schedule mode. See extended help for details.
   set-units <units>                  Set the temperature units used by the thermostat
   set-time                           Sync the system clock to the thermostat
