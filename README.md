@@ -23,6 +23,15 @@ But I have found [Waveshare](https://www.waveshare.com/) to be a good balance be
 Command Line Tool
 -----------------
 
+The `hmmb` command line tool is provided to configure and control thermostats, without having to write any JavaScript.
+
+Two things are required to use the tool:
+* The path to the serial port, that the modbus devices are connected to
+* The Unit Identifier (aka Communications ID) of the thermostat to talk to
+
+These can be provided as command line options, or via environment variables.
+If the Modbus Unit Identifier is not given, it defaults to 1.
+
 ```
 Usage: hmmb [options] [command]
 
@@ -55,6 +64,28 @@ Commands:
   factory-reset                      Restore thermostat to the default factory settings
   help [command]                     display help for command
 ```
+
+
+Some of the commands have additional help text, for example:
+```
+$ hmmb help set-programme-mode  
+Usage: hmmb set-programme-mode [options] <mode>
+
+Set the type of programme / schedule mode. See extended help for details.
+
+Arguments:
+  mode        the programme mode number or name
+
+Options:
+  -h, --help  display help for command
+
+Programme modes:
+  0   5day_2day   One schedule for weekdays, another for weekends (Default)
+  1   7day        Different schedule for each day of the week
+  2   24hour      Same schedule every day
+  3   none        Non-Programmable - temperature control only
+```
+
 License
 -------
 
