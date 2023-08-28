@@ -1,7 +1,13 @@
-node-modbus-heatmiser
+node-heatmiser-modbus
 =====================
 
-node.js library for controlling Heatmiser Modbus Thermostats
+node.js library and command line tool for controlling [Heatmiser] Modbus Thermostats.
+
+It has been tested with the following devices:
+* [Heatmiser Edge]
+* [Heatmiser Touch-E v2]
+
+
 
 Wiring
 ------
@@ -89,7 +95,7 @@ Programme modes:
 License
 -------
 
-`node-modbus-heatmiser` is licensed under the terms of the MIT license.
+`node-heatmiser-modbus` is licensed under the terms of the MIT license.
 See the file [LICENSE](/LICENSE.md) for details.
 
 This software is independently written and maintained and is not supported by Heatmiser UK Limited.
@@ -100,3 +106,8 @@ Contact
 
 * Author:    Nicholas J Humfrey
 * Twitter:   [@njh](http://twitter.com/njh)
+
+
+[Heatmiser]:             https://www.heatmiser.com/
+[Heatmiser Edge]:        https://www.heatmiser.com/en/modbus-thermostat-series/
+[Heatmiser Touch-E v2]:  https://www.heatmiser.com/en/touchscreen-series/
