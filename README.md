@@ -3,6 +3,15 @@ node-modbus-heatmiser
 
 node.js library for controlling Heatmiser Modbus Thermostats
 
+Wiring
+------
+
+To connect a Heatmiser Modbus Thermostat to a computer, you need a RS-485 adaptor.
+
+<img src="docs/usb-to-heatmiser-edge.png" alt="Heatmiser Edge Connected to USB using RS-485 wiring" height="480" />
+
+I initially had some trouble with connecting using a short (1m) cable during testing, until I discovered that the termination resistor in the Heatmiser Edge had to be switched *off* for short distances.
+
 
 Command Line Tool
 -----------------
