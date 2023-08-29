@@ -8,6 +8,19 @@ It has been tested with the following devices:
 * [Heatmiser Touch-E v2]
 
 
+Installation
+------------
+
+To install in your local project:
+```sh
+npm install heatmiser-modbus
+```
+
+Or to install globally and make easy use of the `hmmb` command line tool:
+```sh
+npm install -g heatmiser-modbus
+```
+
 
 Wiring
 ------
