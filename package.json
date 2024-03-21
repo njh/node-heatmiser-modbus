@@ -1,6 +1,6 @@
 {
   "name": "heatmiser-modbus",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Library for controlling Heatmiser Modbus Thermostats",
   "author": "Nicholas Humfrey",
   "license": "MIT",
