@@ -38,6 +38,13 @@ The following RS-485 interfaces have been tested with:
 There are some very expensive industrial RS-485 interfaces out there.
 But I have found [Waveshare](https://www.waveshare.com/) to be a good balance between cost and quality.
 
+To connect everything together, I used a 1 pair Screened 24-AWG RS-485 Cable:
+
+https://cpc.farnell.com/CB21472
+
+As the Heatmiser devices do not have a RS-485 signal ground terminal, I left them disconnected.
+But I looped the shielding through between devices and connected the ground on the Waveshare adaptor.
+
 
 Command Line Tool
 -----------------
@@ -87,7 +94,7 @@ Commands:
 
 Some of the commands have additional help text, for example:
 ```
-$ hmmb help set-programme-mode  
+$ hmmb help set-programme-mode
 Usage: hmmb set-programme-mode [options] <mode>
 
 Set the type of programme / schedule mode. See extended help for details.
@@ -104,6 +111,51 @@ Programme modes:
   2   24hour      Same schedule every day
   3   none        Non-Programmable - temperature control only
 ```
+
+
+JavaScript API Overview
+-----------------------
+
+Methods on the `Client` class:
+
+| Function              | Return type | Description                                       |
+|-----------------------|-------------| --------------------------------------------------|
+| `constructor (port: string)` |  | Creates a new Client with the specified serial port device |
+| `addThermostat (id: number, name?: string)` | `Thermostat` | Add a thermostat to the client |
+| `getThermostat (id: number)` | `Thermostat` | Get an thermostat object |
+| `deleteThermostat (id: number)` | `void` | Deregister / delete a thermosta |
+| `getThermostats ()` | `Thermostat[]` | Get an array of all the thermostats |
+| `async readStatus (thermostat: Thermostat)` | `Promise<any>` | Read the status of a thermostat |
+| `async readTemperatureUnits (id: number)` | `Promise<string>` | Get the temperature units (C/F) |
+| `async connect ()` | `Promise<any>` | Start a connection to the modbus serial port |
+| `close ()` | `void` | Close a connection to the modbus serial port |
+
+
+Methods on the `Thermostat` class:
+
+| Function              | Return type | Description                                       |
+|-----------------------|-------------| --------------------------------------------------|
+| `turnOn()` | `Promise<any>` | Turn On the thermostat |
+| `turnOff()` | `Promise<any>` | Turn Off the thermostat |
+| `holdMode (temperature: number, minutes: number)` | `Promise<any>` | Set thermostat to a temporary temperature of N minutes |
+| `setProgrammePeriods (periods: number)` | `Promise<any>` | Configure the number of heating periods on the thermostat  |
+| `setProgrammeMode (mode: number \| string)` | `Promise<any>` | Set the type of programme / schedule mode (0 / 1 / 2 / 3) |
+| `setTargetTemperature (temperature: number)` | `Promise<any>` | Set the target room temperature |
+| `setFrostProtectTemperature (temperature: number)` | `Promise<any>` | Set the frost protection temperature (7-17 °C) |
+| `setSensorSelection (mode: number)` | `Promise<any>` | Set the sensor selection mode |
+| `setFloorLimitTemperature (temperature: number)` | `Promise<any>` | Set the temperature limit for the floor sensor |
+| `setSwitchingDifferential (temperature: number)` | `Promise<any>` | Set the thermostat switching differential (in °C) |
+| `setOutputDelay (minutes: number)` | `Promise<any>` | Set time in minutes to delay output switching by |
+| `setUpDownLimit (limit: number)` | `Promise<any>` | Set a limit on the use of the up and down keys |
+| `setTemperatureUnits (units: string)` | `Promise<any>` | Set the temperature units used by the hermostat (C/F) |
+| `setTime (time: Date = new Date())` | `Promise<any>` | Set the time. If no date is  given, use the current time. |
+| `setAutoDST (enabled: boolean)` | `Promise<any>` | Enable/disable auto Daylight Saving Time mode |
+| `setKeylock (pin: number \| null)` | `Promise<any>` | Set a PIN number for the therostat |
+| `readFirmwareVersion ()` | `Promise<number>` | Get the firmware version number of the thermostat |
+| `factoryReset ()` | `Promise<any>` | Perform a factory reset of the thermostat - warning this switches off Modbus |
+
+
+
 
 License
 -------
