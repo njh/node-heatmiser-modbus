@@ -206,7 +206,6 @@ Contact
 -------
 
 * Author:    Nicholas J Humfrey
-* Twitter:   [@njh](http://twitter.com/njh)
 
 
 [Heatmiser]:             https://www.heatmiser.com/
