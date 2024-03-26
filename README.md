@@ -191,6 +191,18 @@ Methods on the `Thermostat` class:
 | `factoryReset ()` | `Promise<any>` | Perform a factory reset of the thermostat - warning this switches off Modbus |
 
 
+Limitations
+-----------
+
+There are a number of limitations to the current version of this library, including:
+
+- Turning frost mode on and off
+- No support for setting or getting schedules
+- Wireless Sensors are not tested
+- Setting Holiday / Away Mode
+- Optimum Start
+
+These may be features that are added in the future.
 
 
 License
