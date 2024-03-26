@@ -20,6 +20,7 @@
   "bin": {
     "hmmb": "dist/bin/hmmb.js"
   },
+  "main": "dist/lib/index.js",
   "files": [
     "dist/lib"
   ],
